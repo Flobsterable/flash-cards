@@ -30,4 +30,24 @@ object Dependencies {
     object Detekt {
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0-RC2"
     }
+
+    object Hilt {
+        private const val version = "2.44"
+        const val hilt = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+        const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
+    }
+
+    object Navigation {
+        private const val version = "2.5.3"
+        const val navigation = "androidx.navigation:navigation-compose:$version"
+    }
+
+    object Room {
+        private const val version = "2.4.3"
+        const val room = "androidx.room:room-runtime:$version"
+        const val annotationProcessor = "androidx.room:room-compiler:$version"
+        const val kapt = "androidx.room:room-compiler:$version"
+        const val ktx = "androidx.room:room-ktx:$version"
+    }
 }

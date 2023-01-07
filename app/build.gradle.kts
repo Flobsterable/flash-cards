@@ -1,8 +1,11 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("io.gitlab.arturbosch.detekt")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -62,4 +65,19 @@ dependencies {
     androidTestImplementation(Dependencies.Compose.composeJUnit)
     debugImplementation(Dependencies.Compose.composeUITooling)
     debugImplementation(Dependencies.Compose.composeManifest)
+
+    implementation(Dependencies.Hilt.hilt)
+    kapt(Dependencies.Hilt.compiler)
+    implementation(Dependencies.Hilt.navigation)
+
+    implementation(Dependencies.Navigation.navigation)
+
+    implementation(Dependencies.Room.room)
+    kapt(Dependencies.Room.kapt)
+    implementation(Dependencies.Room.ktx)
+    annotationProcessor(Dependencies.Room.annotationProcessor)
+}
+
+kapt {
+    correctErrorTypes = true
 }
