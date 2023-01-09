@@ -69,6 +69,7 @@ dependencies {
     implementation(Dependencies.Hilt.hilt)
     kapt(Dependencies.Hilt.compiler)
     implementation(Dependencies.Hilt.navigation)
+    implementation(Dependencies.Hilt.worker)
 
     implementation(Dependencies.Navigation.navigation)
 
@@ -76,6 +77,8 @@ dependencies {
     kapt(Dependencies.Room.kapt)
     implementation(Dependencies.Room.ktx)
     annotationProcessor(Dependencies.Room.annotationProcessor)
+
+    implementation(Dependencies.Worker.worker)
 }
 
 kapt {

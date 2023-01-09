@@ -36,6 +36,7 @@ object Dependencies {
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
         const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
+        const val worker = "androidx.hilt:hilt-work:1.0.0"
     }
 
     object Navigation {
@@ -49,5 +50,9 @@ object Dependencies {
         const val annotationProcessor = "androidx.room:room-compiler:$version"
         const val kapt = "androidx.room:room-compiler:$version"
         const val ktx = "androidx.room:room-ktx:$version"
+    }
+
+    object Worker {
+        const val worker = "androidx.work:work-runtime-ktx:2.7.1"
     }
 }

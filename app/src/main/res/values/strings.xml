@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">flashCards</string>
+
+    <string name="notification_channel_id">download_channel</string>
+    <string name="notification_channel_name">Files downloading</string>
+
+    <string name="download_notification_title">Downloading in progress</string>
+    <string name="download_notification_text">Downloading…</string>
+
+    <string name="unzip_notification_title">Unzipping in progress</string>
+    <string name="unzip_notification_text">Unzipping…</string>
 </resources>
