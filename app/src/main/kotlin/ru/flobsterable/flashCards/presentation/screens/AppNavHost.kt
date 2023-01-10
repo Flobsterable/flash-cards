@@ -25,7 +25,7 @@ fun AppNavHost(navController: NavHostController) {
             route = AppScreens.SwipeCardsScreen.route
         ) {
             val viewModel = hiltViewModel<SwipeCardsViewModel>()
-            SwipeCardsScreen()
+            SwipeCardsScreen(viewModel)
         }
     }
 }
