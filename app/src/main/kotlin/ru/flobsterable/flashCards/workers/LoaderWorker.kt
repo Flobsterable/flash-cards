@@ -17,7 +17,7 @@ import java.io.IOException
 import java.net.URL
 
 private const val TEMP_FILE = "temp.zip"
-private const val URL = "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/c0GhIPJ4DSrUyQ"
+private const val URL = "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/B9NXidpS2lSmTQ"
 
 class LoaderWorker(
     context: Context,

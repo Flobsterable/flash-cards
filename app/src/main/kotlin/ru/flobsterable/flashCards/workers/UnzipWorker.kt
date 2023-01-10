@@ -1,8 +1,7 @@
 package ru.flobsterable.flashCards.workers
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.util.Log
 import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.work.CoroutineWorker
@@ -13,19 +12,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.flobsterable.flashCards.R
 import ru.flobsterable.flashCards.notification.processNotificationBuilder
-import java.io.BufferedOutputStream
+import java.io.BufferedInputStream
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 import java.util.zip.ZipFile
 
-private const val BUFFER_SIZE = 4096
+private const val BUFFER_SIZE = 1024
 
 class UnzipWorker(private val appContext: Context, private val params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         startForegroundService()
 
@@ -38,6 +34,7 @@ class UnzipWorker(private val appContext: Context, private val params: WorkerPar
                 zipFile.delete()
                 Result.success()
             } catch (e: IOException) {
+                Log.e("adsff",e.message.toString())
                 Result.failure(
                     workDataOf(
                         WorkerKeys.ERROR_MSG to e.message
@@ -65,42 +62,25 @@ class UnzipWorker(private val appContext: Context, private val params: WorkerPar
         )
     }
 
-    @Throws(IOException::class)
-    private fun unzip(zipFilePath: File, destDirectory: String) {
-        File(destDirectory).run {
-            if (!exists()) {
-                mkdirs()
+    private fun unzip(zipFile: File, targetPath: String) {
+        val zip = ZipFile(zipFile, 1)
+        val enumeration = zip.entries()
+        while (enumeration.hasMoreElements()) {
+            val entry = enumeration.nextElement()
+            val destFilePath = File(targetPath, entry.name)
+            destFilePath.parentFile?.mkdirs()
+
+            if (entry.isDirectory) {
+                continue
             }
-        }
-        ZipFile(zipFilePath).use { zip ->
 
-            zip.entries().asSequence().forEach { entry ->
+            val bufferedIs = BufferedInputStream(zip.getInputStream(entry))
 
-                zip.getInputStream(entry).use { input ->
-
-                    val filePath = destDirectory + File.separator + entry.name
-
-                    if (!entry.isDirectory) {
-                        // if the entry is a file, extracts it
-                        extractFile(input, filePath)
-                    } else {
-                        // if the entry is a directory, make the directory
-                        val dir = File(filePath)
-                        dir.mkdir()
-                    }
+            bufferedIs.use {
+                destFilePath.outputStream().buffered(BUFFER_SIZE).use { bos ->
+                    bufferedIs.copyTo(bos)
                 }
             }
         }
-    }
-
-    @Throws(IOException::class)
-    private fun extractFile(inputStream: InputStream, destFilePath: String) {
-        val bos = BufferedOutputStream(FileOutputStream(destFilePath))
-        val bytesIn = ByteArray(BUFFER_SIZE)
-        var read: Int
-        while (inputStream.read(bytesIn).also { read = it } != -1) {
-            bos.write(bytesIn, 0, read)
-        }
-        bos.close()
     }
 }
