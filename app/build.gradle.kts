@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
@@ -65,6 +64,9 @@ dependencies {
     androidTestImplementation(Dependencies.Compose.composeJUnit)
     debugImplementation(Dependencies.Compose.composeUITooling)
     debugImplementation(Dependencies.Compose.composeManifest)
+    implementation(Dependencies.Compose.livedata)
+
+    implementation(Dependencies.Compose.twyper)
 
     implementation(Dependencies.Hilt.hilt)
     kapt(Dependencies.Hilt.compiler)

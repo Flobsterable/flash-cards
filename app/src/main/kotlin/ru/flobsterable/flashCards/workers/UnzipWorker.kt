@@ -1,7 +1,6 @@
 package ru.flobsterable.flashCards.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.work.CoroutineWorker
@@ -29,12 +28,11 @@ class UnzipWorker(private val appContext: Context, private val params: WorkerPar
             ?.toUri()?.toFile()
 
         if (zipFile != null) {
-            try {
+            return@withContext try {
                 unzip(zipFile, appContext.filesDir.toString())
                 zipFile.delete()
                 Result.success()
             } catch (e: IOException) {
-                Log.e("adsff",e.message.toString())
                 Result.failure(
                     workDataOf(
                         WorkerKeys.ERROR_MSG to e.message

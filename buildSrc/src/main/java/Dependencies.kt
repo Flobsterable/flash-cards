@@ -10,6 +10,8 @@ object Dependencies {
         const val composeJUnit = "androidx.compose.ui:ui-test-junit4:$version"
         const val composeUITooling = "androidx.compose.ui:ui-tooling:$version"
         const val composeManifest = "androidx.compose.ui:ui-test-manifest:$version"
+        const val twyper = "com.github.theapache64:twyper:0.0.4"
+        const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
     }
 
     object Android {

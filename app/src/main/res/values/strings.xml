@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">flashCards</string>
 
+    <string name="button_start">Start</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_download">Download</string>
+
+    <string name="title_downloading">Downloading</string>
+    <string name="title_text">For work need to download files</string>
+
+    <string name="toast_error_message">Something went wrong</string>
+
     <string name="notification_channel_id">download_channel</string>
     <string name="notification_channel_name">Files downloading</string>
 
