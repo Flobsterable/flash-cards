@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ru.flobsterable.flashCards.data.repository.Repository
+import ru.flobsterable.flashCards.data.repository.RepositoryImpl
 import ru.flobsterable.flashCards.navigation.AppNavigation
 import ru.flobsterable.flashCards.navigation.AppNavigationImpl
 import javax.inject.Singleton
@@ -17,4 +19,10 @@ interface AppModule {
     fun bindNavigation(
         appNavigationImpl: AppNavigationImpl
     ): AppNavigation
+
+    @Singleton
+    @Binds
+    fun bindRepository(
+        repositoryImpl: RepositoryImpl
+    ): Repository
 }

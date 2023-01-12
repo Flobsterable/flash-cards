@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import ru.flobsterable.flashCards.presentation.screens.swipeCards.models.WordDataUi
+import ru.flobsterable.flashCards.presentation.screens.models.WordDataUi
 
 private val padding = PaddingValues(6.dp)
 
@@ -40,7 +40,8 @@ fun WordCardComponent(wordData: WordDataUi, onClick: (String) -> Unit) {
         ) {
             SampleRow(
                 text = wordData.word,
-                textStyle = MaterialTheme.typography.headlineLarge) {
+                textStyle = MaterialTheme.typography.headlineLarge
+            ) {
                 onClick("")
             }
             Text(
@@ -51,12 +52,14 @@ fun WordCardComponent(wordData: WordDataUi, onClick: (String) -> Unit) {
             )
             SampleRow(
                 text = wordData.meaningText,
-                textStyle = MaterialTheme.typography.bodyLarge) {
+                textStyle = MaterialTheme.typography.bodyLarge
+            ) {
                 onClick("")
             }
             SampleRow(
                 text = wordData.exampleText,
-                textStyle = MaterialTheme.typography.bodyLarge,) {
+                textStyle = MaterialTheme.typography.bodyLarge,
+            ) {
                 onClick("")
             }
         }

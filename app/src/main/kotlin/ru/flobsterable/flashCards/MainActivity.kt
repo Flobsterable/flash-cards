@@ -8,15 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.flobsterable.flashCards.navigation.AppNavigation
 import ru.flobsterable.flashCards.presentation.screens.AppNavHost
 import ru.flobsterable.flashCards.ui.theme.FlashСardsTheme
-import ru.flobsterable.flashCards.workers.LoaderWorker
-import ru.flobsterable.flashCards.workers.UnzipWorker
 import javax.inject.Inject
 
 @AndroidEntryPoint

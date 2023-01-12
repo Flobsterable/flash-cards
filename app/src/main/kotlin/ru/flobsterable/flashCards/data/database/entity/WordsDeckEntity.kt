@@ -2,9 +2,11 @@ package ru.flobsterable.flashCards.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "WordsDeck")
-class WordsDeckEntity(
+@Entity(tableName = "word_table")
+data class WordsDeckEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val guid: String,
     val name: String,
@@ -21,4 +23,5 @@ class WordsDeckEntity(
     val meaningText: String,
     @ColumnInfo(name = "example_text")
     val exampleText: String,
+    val deckId: Int = 0,
 )

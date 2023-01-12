@@ -82,8 +82,10 @@ dependencies {
 
     implementation(Dependencies.Worker.worker)
 
-    implementation("com.squareup.moshi:moshi:1.14.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+    implementation(Dependencies.Moshi.moshi)
+    kapt(Dependencies.Moshi.codegen)
+
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
 }
 
 kapt {

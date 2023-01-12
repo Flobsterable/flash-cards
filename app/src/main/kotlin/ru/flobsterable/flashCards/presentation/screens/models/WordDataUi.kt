@@ -1,4 +1,4 @@
-package ru.flobsterable.flashCards.presentation.screens.swipeCards.models
+package ru.flobsterable.flashCards.presentation.screens.models
 
 data class WordDataUi(
     val word: String,

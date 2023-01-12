@@ -1,4 +1,4 @@
-package ru.flobsterable.flashCards.data
+package ru.flobsterable.flashCards.data.utils
 
 import java.io.BufferedInputStream
 import java.io.File

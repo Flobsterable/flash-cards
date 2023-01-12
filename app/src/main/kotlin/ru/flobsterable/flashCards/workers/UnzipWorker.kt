@@ -3,27 +3,28 @@ package ru.flobsterable.flashCards.workers
 import android.content.Context
 import androidx.core.net.toFile
 import androidx.core.net.toUri
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.flobsterable.flashCards.R
-import ru.flobsterable.flashCards.data.findFileByExtension
-import ru.flobsterable.flashCards.data.repository.parser.models.Deck
-import ru.flobsterable.flashCards.data.unzip
+import ru.flobsterable.flashCards.data.repository.Repository
+import ru.flobsterable.flashCards.data.utils.unzip
 import ru.flobsterable.flashCards.notification.processNotificationBuilder
 import java.io.IOException
 
-private const val JSON_EXTENSION = "json"
+@HiltWorker
+class UnzipWorker @AssistedInject constructor(
+    @Assisted private val appContext: Context,
+    @Assisted private val params: WorkerParameters,
+    private val repository: Repository,
+) : CoroutineWorker(appContext, params) {
 
-class UnzipWorker(private val appContext: Context, private val params: WorkerParameters) :
-    CoroutineWorker(appContext, params) {
-
-    @OptIn(ExperimentalStdlibApi::class)
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         startForegroundService()
 
@@ -32,14 +33,9 @@ class UnzipWorker(private val appContext: Context, private val params: WorkerPar
 
         if (zipFile != null) {
             return@withContext try {
-                unzip(zipFile, appContext.filesDir.toString())
+                val dirList = unzip(zipFile, appContext.filesDir.toString())
                 zipFile.delete()
-                val jsonFile = findFileByExtension(appContext.filesDir, JSON_EXTENSION)
-                val json = jsonFile?.inputStream()?.bufferedReader().use { it!!.readText() }
-                val moshi: Moshi = Moshi.Builder().build()
-                val jsonAdapter = moshi.adapter<Deck>()
-                val obj = jsonAdapter.fromJson(json)
-
+                repository.saveIntoDatabase(dirList[0])
                 Result.success()
             } catch (e: IOException) {
                 Result.failure(

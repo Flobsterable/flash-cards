@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +20,6 @@ import ru.flobsterable.flashCards.ui.theme.FlashСardsTheme
 
 @Composable
 fun SwipeCardsScreen(viewModel: SwipeCardsViewModel) {
-
     val stateUi = viewModel.uiState.collectAsState()
 
     Column(
@@ -30,7 +27,6 @@ fun SwipeCardsScreen(viewModel: SwipeCardsViewModel) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         val twyperController = rememberTwyperController()
         Twyper(
             modifier = Modifier.padding(60.dp),
@@ -53,5 +49,6 @@ fun SwipeCardsScreen(viewModel: SwipeCardsViewModel) {
 fun test() {
     FlashСardsTheme {
         val viewModel = SwipeCardsViewModel(navigation = AppNavigationImpl())
-        SwipeCardsScreen(viewModel)}
+        SwipeCardsScreen(viewModel)
+    }
 }

@@ -57,4 +57,9 @@ object Dependencies {
     object Worker {
         const val worker = "androidx.work:work-runtime-ktx:2.7.1"
     }
+
+    object Moshi {
+        const val moshi = "com.squareup.moshi:moshi:1.14.0"
+        const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
+    }
 }

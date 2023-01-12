@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import ru.flobsterable.flashCards.navigation.AppNavigation
+import ru.flobsterable.flashCards.presentation.screens.models.WordDataUi
 import javax.inject.Inject
 
 @HiltViewModel
