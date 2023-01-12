@@ -81,6 +81,9 @@ dependencies {
     annotationProcessor(Dependencies.Room.annotationProcessor)
 
     implementation(Dependencies.Worker.worker)
+
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 }
 
 kapt {
