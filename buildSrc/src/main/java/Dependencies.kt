@@ -3,6 +3,8 @@ object Dependencies {
     object Compose {
         const val version = "1.4.0-alpha02"
 
+        const val coil = "io.coil-kt:coil-compose:2.2.2"
+
         const val ui = "androidx.compose.ui:ui:$version"
         const val material = "androidx.compose.material3:material3:1.0.1"
         const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
@@ -10,6 +12,8 @@ object Dependencies {
         const val composeJUnit = "androidx.compose.ui:ui-test-junit4:$version"
         const val composeUITooling = "androidx.compose.ui:ui-tooling:$version"
         const val composeManifest = "androidx.compose.ui:ui-test-manifest:$version"
+        const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
+        const val swiper = "io.github.lhoyong:swiper:1.0.3"
     }
 
     object Android {
@@ -29,5 +33,35 @@ object Dependencies {
 
     object Detekt {
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0-RC2"
+    }
+
+    object Hilt {
+        private const val version = "2.44"
+        const val hilt = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+        const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
+        const val worker = "androidx.hilt:hilt-work:1.0.0"
+    }
+
+    object Navigation {
+        private const val version = "2.5.3"
+        const val navigation = "androidx.navigation:navigation-compose:$version"
+    }
+
+    object Room {
+        private const val version = "2.4.3"
+        const val room = "androidx.room:room-runtime:$version"
+        const val annotationProcessor = "androidx.room:room-compiler:$version"
+        const val kapt = "androidx.room:room-compiler:$version"
+        const val ktx = "androidx.room:room-ktx:$version"
+    }
+
+    object Worker {
+        const val worker = "androidx.work:work-runtime-ktx:2.7.1"
+    }
+
+    object Moshi {
+        const val moshi = "com.squareup.moshi:moshi:1.14.0"
+        const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
     }
 }

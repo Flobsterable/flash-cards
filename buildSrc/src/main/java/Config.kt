@@ -1,7 +1,7 @@
 object Config {
 
     const val compileSdk = 33
-    const val minSDK = 21
+    const val minSDK = 23
     const val targetSDK = 33
 
     const val versionCode = 1

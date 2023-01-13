@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">flashCards</string>
+
+    <string name="button_start">Start</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_download">Download</string>
+
+    <string name="title_downloading">Downloading</string>
+    <string name="title_text">For work need to download files</string>
+    <string name="title_text_end">That is all</string>
+
+    <string name="toast_error_message">Something went wrong</string>
+
+    <string name="notification_channel_id">download_channel</string>
+    <string name="notification_channel_name">Files downloading</string>
+
+    <string name="download_notification_title">Downloading in progress</string>
+    <string name="download_notification_text">Downloading…</string>
+
+    <string name="unzip_notification_title">Unzipping in progress</string>
+    <string name="unzip_notification_text">Unzipping…</string>
+
+    <string name="cd_button_back">Back</string>
+    <string name="cd_play_button">Play</string>
+    <string name="cd_image_word">Image</string>
 </resources>

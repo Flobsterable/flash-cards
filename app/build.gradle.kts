@@ -3,6 +3,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("io.gitlab.arturbosch.detekt")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -24,7 +26,9 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -62,4 +66,31 @@ dependencies {
     androidTestImplementation(Dependencies.Compose.composeJUnit)
     debugImplementation(Dependencies.Compose.composeUITooling)
     debugImplementation(Dependencies.Compose.composeManifest)
+    implementation(Dependencies.Compose.livedata)
+
+    implementation(Dependencies.Hilt.hilt)
+    kapt(Dependencies.Hilt.compiler)
+    implementation(Dependencies.Hilt.navigation)
+    implementation(Dependencies.Hilt.worker)
+
+    implementation(Dependencies.Navigation.navigation)
+
+    implementation(Dependencies.Room.room)
+    kapt(Dependencies.Room.kapt)
+    implementation(Dependencies.Room.ktx)
+    annotationProcessor(Dependencies.Room.annotationProcessor)
+
+    implementation(Dependencies.Worker.worker)
+
+    implementation(Dependencies.Moshi.moshi)
+    kapt(Dependencies.Moshi.codegen)
+
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+    implementation(Dependencies.Compose.coil)
+    implementation(Dependencies.Compose.swiper)
+}
+
+kapt {
+    correctErrorTypes = true
 }
