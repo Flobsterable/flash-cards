@@ -3,6 +3,8 @@ object Dependencies {
     object Compose {
         const val version = "1.4.0-alpha02"
 
+        const val coil = "io.coil-kt:coil-compose:2.2.2"
+
         const val ui = "androidx.compose.ui:ui:$version"
         const val material = "androidx.compose.material3:material3:1.0.1"
         const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
@@ -10,8 +12,8 @@ object Dependencies {
         const val composeJUnit = "androidx.compose.ui:ui-test-junit4:$version"
         const val composeUITooling = "androidx.compose.ui:ui-tooling:$version"
         const val composeManifest = "androidx.compose.ui:ui-test-manifest:$version"
-        const val twyper = "com.github.theapache64:twyper:0.0.4"
         const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
+        const val swiper = "io.github.lhoyong:swiper:1.0.3"
     }
 
     object Android {

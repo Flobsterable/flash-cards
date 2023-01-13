@@ -1,7 +1,6 @@
 package ru.flobsterable.flashCards.data.repository
 
 import android.content.Context
-import android.util.Log
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -10,12 +9,12 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import ru.flobsterable.flashCards.data.database.DatabaseDao
-import ru.flobsterable.flashCards.data.utils.findFileByExtension
 import ru.flobsterable.flashCards.data.models.Resource
 import ru.flobsterable.flashCards.data.repository.parser.ParserData
 import ru.flobsterable.flashCards.data.repository.parser.models.Deck
-import ru.flobsterable.flashCards.presentation.screens.models.DeckDataUi
-import ru.flobsterable.flashCards.presentation.screens.models.WordDataUi
+import ru.flobsterable.flashCards.data.utils.findFileByExtension
+import ru.flobsterable.flashCards.presentation.models.DeckDataUi
+import ru.flobsterable.flashCards.presentation.models.WordDataUi
 import java.io.File
 import javax.inject.Inject
 
@@ -38,7 +37,7 @@ class RepositoryImpl @Inject constructor(
     override suspend fun wordsListFromDeck(deckId: Int): Flow<Resource<List<WordDataUi>>> = flow {
         val data = database.getDeckWithWords(deckId).firstOrNull()
         when (data != null) {
-            true -> emit(Resource.Success(data[0].words.toWordsUiData()))
+            true -> emit(Resource.Success(data.words.toWordsUiData()))
             false -> emit(Resource.Error("isEmpty"))
         }
     }

@@ -10,6 +10,11 @@ class AppNavigationImpl @Inject constructor() : AppNavigation {
         navHostController?.navigate(appScreen.route)
     }
 
+    override fun navigateTo(appScreen: AppScreens, arg: String?) {
+        val route = "${appScreen.route}/$arg"
+        navHostController?.navigate(route)
+    }
+
     override fun popBackStack() {
         navHostController?.popBackStack()
     }

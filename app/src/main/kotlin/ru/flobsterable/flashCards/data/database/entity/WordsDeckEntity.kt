@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "word_table")
 data class WordsDeckEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val guid: String,
     val name: String,
     val transcription: String,

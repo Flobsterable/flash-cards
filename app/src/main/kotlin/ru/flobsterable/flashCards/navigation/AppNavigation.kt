@@ -7,4 +7,5 @@ interface AppNavigation {
 
     fun navigateTo(appScreen: AppScreens)
     fun popBackStack()
+    fun navigateTo(appScreen: AppScreens, arg: String?)
 }

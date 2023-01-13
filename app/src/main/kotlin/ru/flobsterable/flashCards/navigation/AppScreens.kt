@@ -1,5 +1,7 @@
 package ru.flobsterable.flashCards.navigation
 
+const val DETAIL_ARGUMENT_KEY = "deckId"
+
 sealed class AppScreens(
     val route: String
 ) {

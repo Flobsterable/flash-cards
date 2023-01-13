@@ -23,5 +23,5 @@ interface DatabaseDao {
 
     @Transaction
     @Query("SELECT * FROM deck_table WHERE id = :deckId")
-    fun getDeckWithWords(deckId: Int): Flow<List<DeckWithWords>>
+    fun getDeckWithWords(deckId: Int): Flow<DeckWithWords>
 }

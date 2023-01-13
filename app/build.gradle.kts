@@ -66,8 +66,6 @@ dependencies {
     debugImplementation(Dependencies.Compose.composeManifest)
     implementation(Dependencies.Compose.livedata)
 
-    implementation(Dependencies.Compose.twyper)
-
     implementation(Dependencies.Hilt.hilt)
     kapt(Dependencies.Hilt.compiler)
     implementation(Dependencies.Hilt.navigation)
@@ -86,6 +84,9 @@ dependencies {
     kapt(Dependencies.Moshi.codegen)
 
     kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+    implementation(Dependencies.Compose.coil)
+    implementation(Dependencies.Compose.swiper)
 }
 
 kapt {

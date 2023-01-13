@@ -1,45 +1,68 @@
 package ru.flobsterable.flashCards.presentation.screens.swipeCards.models
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import ru.flobsterable.flashCards.data.models.Resource
+import ru.flobsterable.flashCards.data.repository.Repository
 import ru.flobsterable.flashCards.navigation.AppNavigation
-import ru.flobsterable.flashCards.presentation.screens.models.WordDataUi
 import javax.inject.Inject
+
+private const val SAMPLE_NUMBER = 20
 
 @HiltViewModel
 class SwipeCardsViewModel @Inject constructor(
     private val navigation: AppNavigation,
+    private val repository: Repository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SwipeCardsUiState.Empty)
     val uiState: StateFlow<SwipeCardsUiState> = _uiState.asStateFlow()
 
+    private val mediaPlayer = MediaPlayer().apply {
+        setAudioAttributes(
+            AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .build()
+        )
+    }
+
     fun sendEvent(event: SwipeCardsEvent) {
         when (event) {
-            SwipeCardsEvent.PlaySound -> playSound("")
+            is SwipeCardsEvent.GetWords -> getWords(event.deckId)
+            is SwipeCardsEvent.PlaySound -> playSound(event.mediaPath)
             SwipeCardsEvent.PopBack -> popBack()
         }
     }
 
-    init {
-        getWords()
+    private fun getWords(id: Int) {
+        viewModelScope.launch {
+            repository.wordsListFromDeck(id).collect { resource ->
+                when (resource) {
+                    is Resource.Error -> {}
+                    is Resource.Success -> {
+                        val data = resource.data
+                        _uiState.update { it.copy(words = data.shuffled().take(SAMPLE_NUMBER)) }
+                    }
+                }
+            }
+        }
     }
 
-    private fun getWords() {
-        val testList = listOf(
-            WordDataUi("test", "test", "test", "test"),
-            WordDataUi("test2", "test2", "test2", "test2"),
-            WordDataUi("test3", "test3", "test3", "test3")
-        )
-
-        _uiState.update { it.copy(words = testList) }
+    private fun playSound(mediaPath: String) {
+        mediaPlayer.reset()
+        mediaPlayer.setDataSource(mediaPath)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
     }
-
-    private fun playSound(url: String) {}
 
     private fun popBack() {
         navigation.popBackStack()

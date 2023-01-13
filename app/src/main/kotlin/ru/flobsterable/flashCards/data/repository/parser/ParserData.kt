@@ -5,8 +5,8 @@ import ru.flobsterable.flashCards.data.database.entity.WordsDeckEntity
 import ru.flobsterable.flashCards.data.repository.parser.models.Children
 import ru.flobsterable.flashCards.data.repository.parser.models.Deck
 import ru.flobsterable.flashCards.data.repository.parser.models.Note
-import ru.flobsterable.flashCards.presentation.screens.models.DeckDataUi
-import ru.flobsterable.flashCards.presentation.screens.models.WordDataUi
+import ru.flobsterable.flashCards.presentation.models.DeckDataUi
+import ru.flobsterable.flashCards.presentation.models.WordDataUi
 import kotlin.random.Random
 
 interface ParserData {
@@ -21,10 +21,10 @@ interface ParserData {
     }
 
     fun List<Note>.parseNoteList(mediaDir: String, deckId: Int): List<WordsDeckEntity> {
-        return this.map { it.parserWordData().copy(deckId = deckId) }
+        return this.map { it.parserWordData(mediaDir, deckId) }
     }
 
-    fun Note.parserWordData(): WordsDeckEntity {
+    fun Note.parserWordData(mediaDir: String, deckId: Int): WordsDeckEntity {
         val fieldList = this.fields.map { it.preparation() }
 
         return WordsDeckEntity(
@@ -32,12 +32,13 @@ interface ParserData {
             guid = this.guid,
             name = fieldList[0],
             transcription = fieldList[7],
-            imgPath = fieldList[1],
-            wordSoundPath = fieldList[2],
-            meaningSoundPath = fieldList[3],
-            exampleSoundPath = fieldList[4],
+            imgPath = mediaDir + fieldList[1],
+            wordSoundPath = mediaDir + fieldList[2],
+            meaningSoundPath = mediaDir + fieldList[3],
+            exampleSoundPath = mediaDir + fieldList[4],
             meaningText = fieldList[5],
             exampleText = fieldList[6],
+            deckId = deckId
         )
     }
 

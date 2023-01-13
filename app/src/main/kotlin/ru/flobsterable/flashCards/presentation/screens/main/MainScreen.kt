@@ -62,12 +62,12 @@ fun MainScreen(viewModel: MainViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        when (uiState.value.dataTitleName != null) {
+        when (uiState.value.deckData != null) {
             true -> {
                 MainComponent(
-                    titleText = uiState.value.dataTitleName!!,
+                    titleText = uiState.value.deckData!!.name,
                     buttonText = stringResource(id = R.string.button_start),
-                ) { viewModel.sendEvent(MainEvent.OpenSwipeCards) }
+                ) { viewModel.sendEvent(MainEvent.OpenSwipeCards(uiState.value.deckData!!.id)) }
             }
             false -> {
                 when (isLoading.value) {
