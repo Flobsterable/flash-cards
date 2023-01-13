@@ -12,9 +12,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
 import com.github.lhoyong.swiper.Swiper
 import com.github.lhoyong.swiper.rememberSwiperState
 import ru.flobsterable.flashCards.R
+import ru.flobsterable.flashCards.presentation.screens.components.OnLifecycleEvent
 import ru.flobsterable.flashCards.presentation.screens.components.TopBar
 import ru.flobsterable.flashCards.presentation.screens.swipeCards.components.WordCardComponent
 import ru.flobsterable.flashCards.presentation.screens.swipeCards.models.SwipeCardsEvent
@@ -25,6 +27,13 @@ import ru.flobsterable.flashCards.ui.consts.swiperPadding
 fun SwipeCardsScreen(viewModel: SwipeCardsViewModel, id: Int) {
     val stateUi = viewModel.uiState.collectAsState()
     val swiperState = rememberSwiperState()
+
+    OnLifecycleEvent { owner, event ->
+        when (event) {
+            Lifecycle.Event.ON_STOP -> { viewModel.sendEvent(SwipeCardsEvent.StopPlay) }
+            else -> { }
+        }
+    }
 
     LaunchedEffect(key1 = Unit, block = {
         viewModel.sendEvent(SwipeCardsEvent.GetWords(id))

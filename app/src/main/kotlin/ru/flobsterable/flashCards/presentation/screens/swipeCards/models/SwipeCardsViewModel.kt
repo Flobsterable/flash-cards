@@ -2,6 +2,7 @@ package ru.flobsterable.flashCards.presentation.screens.swipeCards.models
 
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,7 @@ private const val SAMPLE_NUMBER = 20
 class SwipeCardsViewModel @Inject constructor(
     private val navigation: AppNavigation,
     private val repository: Repository,
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
 
     private val _uiState = MutableStateFlow(SwipeCardsUiState.Empty)
     val uiState: StateFlow<SwipeCardsUiState> = _uiState.asStateFlow()
@@ -40,6 +41,7 @@ class SwipeCardsViewModel @Inject constructor(
             is SwipeCardsEvent.GetWords -> getWords(event.deckId)
             is SwipeCardsEvent.PlaySound -> playSound(event.mediaPath)
             SwipeCardsEvent.PopBack -> popBack()
+            SwipeCardsEvent.StopPlay -> stopSound()
         }
     }
 
@@ -62,6 +64,10 @@ class SwipeCardsViewModel @Inject constructor(
         mediaPlayer.setDataSource(mediaPath)
         mediaPlayer.prepare()
         mediaPlayer.start()
+    }
+
+    private fun stopSound() {
+        mediaPlayer.reset()
     }
 
     private fun popBack() {
